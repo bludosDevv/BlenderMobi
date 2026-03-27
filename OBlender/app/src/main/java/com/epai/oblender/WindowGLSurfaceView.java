@@ -49,6 +49,7 @@ public class WindowGLSurfaceView extends SurfaceView implements SurfaceHolder.Ca
 
     private void init() {
         getHolder().addCallback(this);
+        getHolder().setFormat(android.graphics.PixelFormat.RGBA_8888);
     }
 
         @Override
