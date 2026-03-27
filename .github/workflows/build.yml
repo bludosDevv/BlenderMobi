@@ -28,7 +28,7 @@ jobs:
       run: ./gradlew assembleDebug assembleRelease
 
     - name: Upload APKs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-apks
         path: OBlender/app/build/outputs/apk/**/*.apk
