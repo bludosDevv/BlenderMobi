@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.epai.oblender">
 
-    <uses-feature android:glEsVersion="0x00030002" />
+    <uses-feature android:glEsVersion="0x00030000" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <uses-feature android:name="android.hardware.type.pc" android:required="false" />
 
@@ -21,6 +21,7 @@
         android:screenOrientation="landscape"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/Theme.OBlender">
         <activity
             android:name=".OBLNativeActivity"

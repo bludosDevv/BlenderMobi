@@ -89,12 +89,13 @@ static int engine_init_display(struct android_app *app) {
     BLI_setenv("PYTHONPATH",PYTHON_PATH);
     BLI_setenv("PYTHONHOME",PYTHON_PATH);
     BLI_setenv("BLENDER_EXTERN_DRACO_LIBRARY_PATH",BLENDER_EXTERN_DRACO_LIBRARY_PATH);
+
     char blenderpath[256]={0};
     strcat(blenderpath,strHomePath);
     strcat(blenderpath,"blender");
     const char *argv1 = blenderpath;
-    const char *argv[2] = {argv1,"-d"};
-    userData->pContext=mainBlenderInitial(2, (const char **) (argv));
+    const char *argv[1] = {argv1};
+    userData->pContext=mainBlenderInitial(1, (const char **) (argv));
     isInitial=true;
     return 0;
 }
