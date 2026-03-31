@@ -66,7 +66,7 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
-set(BLENDER_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../..)
+set(BLENDER_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../)
 set(blenderLibDir    ${BLENDER_BASE_DIR}/Blender-android_arm64/)
 set(blenderLibLibDirRelease ${BLENDER_BASE_DIR}/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/release/arm64-v8a/lib/)
 set(blenderLibLibDirDebug ${BLENDER_BASE_DIR}/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/debug/arm64-v8a/lib/)

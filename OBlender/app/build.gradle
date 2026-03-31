@@ -27,10 +27,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
+    def blenderBaseDir = file("${projectDir}/../../..")
+    def hasBlenderNative = file("${blenderBaseDir}/Blender-android_arm64").exists()
+
+    if (hasBlenderNative) {
+        externalNativeBuild {
+            cmake {
+                path "src/main/cpp/CMakeLists.txt"
+                version "3.10.2"
+            }
         }
     }
     compileOptions {
