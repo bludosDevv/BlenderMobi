@@ -52,7 +52,7 @@ static int engine_init_display_reinit(struct android_app*app){
  */
 static int engine_init_display(struct android_app *app) {
     // 重定向 stderr 到文件 无法实现重定向
-    char logpath[256]={0};
+    char logpath[1024]={0};
     strcat(logpath,strHomePath);
     strcat(logpath,"error.log");
     if (freopen(logpath, "w", stderr) == NULL) {
@@ -71,16 +71,16 @@ static int engine_init_display(struct android_app *app) {
     LOGI("路径 %s %s",strConfigPath,strHomePath);
 
 
-    char BLENDER_SYSTEM_DATAFILES_Path[256]={0};
+    char BLENDER_SYSTEM_DATAFILES_Path[1024]={0};
     strcat(BLENDER_SYSTEM_DATAFILES_Path,strConfigPath);
     strcat(BLENDER_SYSTEM_DATAFILES_Path,"4.0/config/datafiles");
-    char BLENDER_SYSTEM_SCRIPTS_PATH[256]={0};
+    char BLENDER_SYSTEM_SCRIPTS_PATH[1024]={0};
     strcat(BLENDER_SYSTEM_SCRIPTS_PATH,strConfigPath);
     strcat(BLENDER_SYSTEM_SCRIPTS_PATH,"scripts");
-    char PYTHON_PATH[256]={0};
+    char PYTHON_PATH[1024]={0};
     strcat(PYTHON_PATH,strConfigPath);
     strcat(PYTHON_PATH,"python");
-    char BLENDER_EXTERN_DRACO_LIBRARY_PATH[256]={0};
+    char BLENDER_EXTERN_DRACO_LIBRARY_PATH[1024]={0};
     strcat(BLENDER_EXTERN_DRACO_LIBRARY_PATH,strConfigPath);
     strcat(BLENDER_EXTERN_DRACO_LIBRARY_PATH,"python/lib/python3.11/site-packages/libextern_draco.so");
 //    BLI_setenv("BLENDER_USER_DATAFILES",(strConfigPath+std::string("4.0/config/datafiles")).c_str());
@@ -90,7 +90,7 @@ static int engine_init_display(struct android_app *app) {
     BLI_setenv("PYTHONHOME",PYTHON_PATH);
     BLI_setenv("BLENDER_EXTERN_DRACO_LIBRARY_PATH",BLENDER_EXTERN_DRACO_LIBRARY_PATH);
 
-    char blenderpath[256]={0};
+    char blenderpath[1024]={0};
     strcat(blenderpath,strHomePath);
     strcat(blenderpath,"blender");
     const char *argv1 = blenderpath;
@@ -159,31 +159,30 @@ void android_main(struct android_app *state) {
 
     while (true) {
         // Read all pending events.
-        if(isInitial){
-            engine_draw_frame(state);
-        }else{
-            int ident;
-            int events;
-            struct android_poll_source *source;
+        int ident;
+        int events;
+        struct android_poll_source *source;
 
-            // we loop until all events are read, then continue
-            // to draw the next frame of animation.
-            while ((ident = ALooper_pollAll(0, nullptr, &events,
-                                            (void **) &source)) >= 0) {
+        // we loop until all events are read, then continue
+        // to draw the next frame of animation.
+        while ((ident = ALooper_pollAll(isInitial ? 0 : -1, nullptr, &events,
+                                        (void **) &source)) >= 0) {
 
-                // Process this event.
-                if (source != nullptr) {
-                    source->process(state, source);
-                }
-                // If a sensor has data, process it now.
-                if (ident == LOOPER_ID_USER) {
-
-                }
-                // Check if we are exiting.
-                if (state->destroyRequested != 0) {
-                    return;
-                }
+            // Process this event.
+            if (source != nullptr) {
+                source->process(state, source);
             }
+            // If a sensor has data, process it now.
+            if (ident == LOOPER_ID_USER) {
+
+            }
+            // Check if we are exiting.
+            if (state->destroyRequested != 0) {
+                return;
+            }
+        }
+        if (isInitial) {
+            engine_draw_frame(state);
         }
     }
 }

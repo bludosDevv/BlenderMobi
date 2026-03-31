@@ -1,8 +1,8 @@
 
 
 
-extern char strHomePath[256];
-extern char strConfigPath[256];
+extern char strHomePath[1024];
+extern char strConfigPath[1024];
 extern void* mainBlenderInitial(int argc, const char **argv);
 extern void mainBlenderInitial_reinit(void*pContext);
 extern int mainBlenderLoop(void*pContext);
