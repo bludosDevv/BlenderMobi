@@ -622,8 +622,8 @@ extern "C" JNIEXPORT void JNICALL Java_com_epai_oblender_OBLNativeActivity_initi
     std::string strHomePathTemp=jstring2string(env, stringparameter);
     std::string strConfigPathTemp=jstring2string(env,stringPython);
 
-    strcat(strHomePath,strHomePathTemp.c_str());
-    strcat(strConfigPath,strConfigPathTemp.c_str());
+    strcpy(strHomePath,strHomePathTemp.c_str());
+    strcpy(strConfigPath,strConfigPathTemp.c_str());
 }
 extern "C" JNIEXPORT void JNICALL Java_com_epai_oblender_OBLNativeActivity_updateSurface(
         JNIEnv *env,

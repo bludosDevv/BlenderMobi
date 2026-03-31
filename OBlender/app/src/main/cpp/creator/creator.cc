@@ -9,8 +9,8 @@
 #include <string.h>
 #include "creator.h"
 
-char strHomePath[256]={0};
-char strConfigPath[256]={0};
+char strHomePath[1024]={0};
+char strConfigPath[1024]={0};
 
 #ifdef WIN32
 #  include "utfconv.h"
@@ -381,11 +381,13 @@ void* mainBlenderInitial(int argc,
   CLG_fatal_fn_set(callback_clg_fatal);
   
    //  修改 设置打印日志
-   char logPath[256]={0};
+   char logPath[1024]={0};
     strcat(logPath,strHomePath);
     strcat(logPath,"log.log");
   FILE*logFile=(FILE*)(fopen(logPath,"w"));
-  CLG_output_set(logFile);
+  if (logFile) {
+    CLG_output_set(logFile);
+  }
   CLG_backtrace_fn_set(callback_clg_fatal);
 
   C = CTX_create();

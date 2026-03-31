@@ -249,7 +249,7 @@ public final class FileUtils {
             if (!mkdirs) {
                 File fileexternal = context.getExternalFilesDir(strSubDir);
                 if (fileexternal != null) {
-                    return file.getAbsolutePath();
+                    return fileexternal.getAbsolutePath();
                 } else {
                     return null;
                 }

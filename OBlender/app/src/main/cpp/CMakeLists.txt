@@ -66,15 +66,16 @@ add_library( # Sets the name of the library.
 # you want to add. CMake verifies that the library exists before
 # completing its build.
 
-set(blenderLibDir    D:/FreeProjects/Blender/Blender/Blender-android_arm64/)
-set(blenderLibLibDirRelease D:/FreeProjects/Blender/Blender/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/release/arm64-v8a/lib/)
-set(blenderLibLibDirDebug D:/FreeProjects/Blender/Blender/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/debug/arm64-v8a/lib/)
+set(BLENDER_BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../../../../)
+set(blenderLibDir    ${BLENDER_BASE_DIR}/Blender-android_arm64/)
+set(blenderLibLibDirRelease ${BLENDER_BASE_DIR}/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/release/arm64-v8a/lib/)
+set(blenderLibLibDirDebug ${BLENDER_BASE_DIR}/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/debug/arm64-v8a/lib/)
 
 target_include_directories(blender PUBLIC
-        D:/FreeProjects/Blender/Blender/lib-android_arm64/boost/boost_1_71_0/
-        D:/FreeProjects/Blender/Blender/lib-android_arm64/OpenVDB/include/
-        D:/FreeProjects/Blender/Blender/lib-android_arm64/Tbb/include/tbb-master/include/
-        D:/FreeProjects/Blender/Blender/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/release/arm64-v8a/source/creator/
+        ${BLENDER_BASE_DIR}/lib-android_arm64/boost/boost_1_71_0/
+        ${BLENDER_BASE_DIR}/lib-android_arm64/OpenVDB/include/
+        ${BLENDER_BASE_DIR}/lib-android_arm64/Tbb/include/tbb-master/include/
+        ${BLENDER_BASE_DIR}/Utilities-android_arm64/MakeBlender/app/.cxx/cmake/release/arm64-v8a/source/creator/
         ${blenderLibDir}/intern/
         ${blenderLibDir}/intern/clog/
         ${blenderLibDir}/intern/ghost/
@@ -413,8 +414,8 @@ target_link_libraries( # Specifies the target library.
         EGL
         android
         jnigraphics
-        D:/FreeProjects/Blender/Blender/lib-android_arm64/JPEG/lib/libjpeg.a
-        D:/FreeProjects/Blender/Blender/lib-android_arm64/PugiXML/lib/libpugixml.a
-        D:/FreeProjects/Blender/Blender/lib-android_arm64/Epoxy/lib/libepoxy.a
+        ${BLENDER_BASE_DIR}/lib-android_arm64/JPEG/lib/libjpeg.a
+        ${BLENDER_BASE_DIR}/lib-android_arm64/PugiXML/lib/libpugixml.a
+        ${BLENDER_BASE_DIR}/lib-android_arm64/Epoxy/lib/libepoxy.a
         ${log-lib}
         )
